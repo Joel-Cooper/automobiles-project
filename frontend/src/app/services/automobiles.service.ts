@@ -8,9 +8,11 @@ import { Automobile } from '../model/automobile.type';
 export class AutomobilesService {
   http = inject(HttpClient);
   
-  addAutomobile(newItem: any) {
+  addAutomobile(newAutomobile: any) {
     const url = 'https://automobiles-project.onrender.com/automobiles';
-    return this.http.post<{ message: string }>(url, newItem);
+    return this.http.post<{ message: string }>(url, newAutomobile, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   getAutomobilesFromApi() {
