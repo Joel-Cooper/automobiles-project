@@ -4,9 +4,7 @@ import fs from 'fs/promises';
 import cors from 'cors';
 import { readLocalDataset } from './dataProcessor.js'; 
 
-const credentials = JSON.parse(
-    await fs.readFile('./key.json', 'utf-8')
-);
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
 
 admin.initializeApp({
     credential: admin.credential.cert(credentials)
