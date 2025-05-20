@@ -9,7 +9,7 @@ export class AutomobilesService {
   http = inject(HttpClient);
   
   addAutomobile(newAutomobile: any) {
-    const url = 'https://automobiles-project.onrender.com/automobiles';
+    const url = 'https://automobiles-project.onrender.com/add/automobile';
     return this.http.post<{ message: string }>(url, newAutomobile, {
       headers: { 'Content-Type': 'application/json' }
     });
