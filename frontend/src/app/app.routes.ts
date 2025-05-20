@@ -9,7 +9,7 @@ export const routes: Routes = [
         },
     },
     {
-        path: 'data-display',
+        path: 'automobiles',
         loadComponent: () => {
             return import('./data-display/data-display.component').then((m) => m.DataDisplayComponent);
         },
