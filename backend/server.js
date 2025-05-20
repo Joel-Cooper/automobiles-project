@@ -2,8 +2,10 @@ import express from 'express';
 import admin from 'firebase-admin';
 import fs from 'fs/promises';
 import cors from 'cors';
-import { readLocalDataset } from './dataProcessor.js'; 
+import { readLocalDataset } from './dataProcessor.js';
+import format from 'fast-csv'; 
 
+ 
 const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
 
 admin.initializeApp({
@@ -69,7 +71,7 @@ app.get('/automobiles', async (req, res) => {
     } catch (error) {
         res.status(500).send({
             success: false,
-            message: message.error
+            message: error.message
         });
     }
 });
@@ -102,4 +104,25 @@ app.post('/add/automobile', async (req, res) => {
       message: error.message
     });
   }
+});
+
+
+// GET API for downloading dataset as CSV file
+app.get('/download/automobiles', async (req, res) => {
+    try {
+        const snapshot = await db.collection('automobiles').get();
+        const data = snapshot.docs.map(doc => doc.data());
+
+        res.setHeader('Content-Disposition', 'attachment; filename=automobiles.csv');
+        res.setHeader('Content-Type', 'text/csv');
+        
+        const csvStream = format({ headers: true });
+        csvStream.pipe(res);
+
+        data.forEach(row => csvStream.write(row));
+        csvStream.end();
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Failed to generate CSV.");
+    }
 });
