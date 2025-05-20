@@ -3,7 +3,7 @@ import admin from 'firebase-admin';
 import fs from 'fs/promises';
 import cors from 'cors';
 import { readLocalDataset } from './dataProcessor.js';
-import format from 'fast-csv'; 
+import { format } from 'fast-csv'; 
 
  
 const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
