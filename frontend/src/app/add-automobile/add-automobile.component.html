@@ -1,0 +1,15 @@
+<h3>Add Automobile</h3>
+
+<form #automobileForm="ngForm" (ngSubmit)="onSubmit(automobileForm)" class="automobile-form">
+  <label>Name: <input type="text" name="name" ngModel required /></label>
+  <label>MPG: <input type="number" name="mpg" ngModel required /></label>
+  <label>Cylinders: <input type="number" name="cylinders" ngModel required /></label>
+  <label>Displacement: <input type="number" name="displacement" ngModel required /></label>
+  <label>Horsepower: <input type="number" name="horsepower" ngModel required /></label>
+  <label>Weight: <input type="number" name="weight" ngModel required /></label>
+  <label>Acceleration: <input type="number" name="acceleration" ngModel required /></label>
+  <label>Model Year: <input type="number" name="model_year" ngModel required /></label>
+  <label>Origin: <input type="text" name="origin" ngModel required /></label>
+
+  <button type="submit" [disabled]="automobileForm.invalid">Add Automobile</button>
+</form>

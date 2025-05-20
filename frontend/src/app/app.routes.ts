@@ -14,4 +14,10 @@ export const routes: Routes = [
             return import('./data-display/data-display.component').then((m) => m.DataDisplayComponent);
         },
     },
+    {
+        path: 'add-automobiles',
+        loadComponent: () => {
+            return import('./add-automobile/add-automobile.component').then((m) => m.AddAutomobileComponent);
+        },
+    }
 ];

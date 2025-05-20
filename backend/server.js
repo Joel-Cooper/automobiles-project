@@ -73,3 +73,33 @@ app.get('/automobiles', async (req, res) => {
         });
     }
 });
+
+
+// POST API
+app.post('/add/automobile', async (req, res) => {
+  try {
+    const automobileJson = {
+      name: req.body.name,
+      mpg: req.body.mpg,
+      cylinders: req.body.cylinders,
+      displacement: req.body.displacement,
+      horsepower: req.body.horsepower,
+      weight: req.body.weight,
+      acceleration: req.body.acceleration,
+      model_year: req.body.model_year,
+      origin: req.body.origin
+    };
+
+    await db.collection('automobiles').add(automobileJson);
+
+    res.send({
+      success: true,
+      message: 'Automobile created.'
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: error.message
+    });
+  }
+});
